@@ -10,6 +10,24 @@ const initialState = [
 const INCREASE = 'INCREASE';
 
 
+// action creators
+
+const increaseScore = (event, match) => {
+    if (event.key === 'Enter') {
+        event.preventDefault()
+    }
+    console.log(event)
+    console.log(event.preventDefault)
+    return {
+        type: INCREASE,
+        payload: {
+            match,
+            event
+        }
+    }
+}
+
+
 
 //reducer function
 
@@ -25,9 +43,10 @@ const reducer = (state = initialState, action) => {
     return state;
 }
 
-
-
+//store
 const store = Redux.createStore(reducer);
+
+
 
 
 const render = () => {
@@ -47,11 +66,18 @@ const render = () => {
         <div class="inc-dec">
             <form class="incrementForm">
                 <h4>Increment</h4>
-                <input type="number" name="increment" class="lws-increment" />
+                <input 
+                type="number" 
+                name="increment" 
+                class="lws-increment" 
+                onchange="increaseScore(event, ${match.match})" />
             </form>
             <form class="decrementForm">
                 <h4>Decrement</h4>
-                <input type="number" name="decrement" class="lws-decrement" />
+                <input 
+                type="number" 
+                name="decrement" 
+                class="lws-decrement" />
             </form>
         </div>
         <div class="numbers">
